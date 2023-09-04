@@ -20,13 +20,10 @@ function displayProducts(fetchProduct) {
         const productCard = document.createElement('div');
         productCard.classList.add('card');
         productCard.innerHTML += `
+            <img src="${product.image}" alt="${product.name}"/>
             <h2>${product.name}</h2>
-            <p>${product.description}</p>
-            <p>Stok: ${product.stock}</p>
             <p>Fiyat: ${product.price}</p>
-            <p>Cinsiyet: ${product.gender}</p>
-            <p>Tür: ${product.type}</p>
-            <img src="${product.image}" alt="${product.name}" />
+            <button>Sepete Ekle</button>
             `;
             
             productContainer.appendChild(productCard);
@@ -36,6 +33,25 @@ function displayProducts(fetchProduct) {
     window.addEventListener('load', () => {
         fetchProducts();
     });
+
+    // <p>Cinsiyet: ${product.gender}</p>
+    // <p>Stok: ${product.stock}</p>
+    // <p>Tür: ${product.type}</p>
+    // <p>${product.description}</p>
+
+    // supabase' de card'da görünecek kısa detay ekle
+    // descriptionu uzun detay ürüne tıkladığında görünsün
+
+
+
+
+
+
+
+
+
+
+
     // fetch(
     //     'https://rceavizwdfumfwcligdo.supabase.co/rest/v1/product'
     //     , {

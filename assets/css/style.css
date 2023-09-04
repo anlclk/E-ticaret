@@ -1,7 +1,6 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
-
 * {
   margin: 0;
 }
@@ -33,10 +32,39 @@ a {
   border: solid;
   margin-inline: auto;
 }
+.header {
+  display: flex;
+  padding-block: 40px;
+  padding-inline: 50px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.headerNav {
+  display: flex;
+  gap: 50px;
+}
+.wrapper {
+  margin-bottom: 50px;
+}
+.wrapperNav{
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.wrapperNav li{
+  border: solid;
+  padding-inline: 80px;
+}
+.main {
+  padding-inline: 40px;
+}
 .productContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 40px;
 }
 .card {
   border: solid 4px;
+  padding-inline: 20px;
 }
