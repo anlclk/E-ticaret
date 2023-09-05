@@ -8,9 +8,8 @@ async function fetchProducts() {
     }
     ).then(x => x.json());
     console.log(fetchProduct);
-    displayProducts(fetchProduct)
-    
-
+    displayProducts(fetchProduct);
+    // filteredProducts(fetchProduct);
 }
 
 function displayProducts(fetchProduct) {
@@ -30,9 +29,30 @@ function displayProducts(fetchProduct) {
         });
     }
     
+
+    //  Filtreleme
+// function filteredProducts (fetchProduct) {
+//     const erkekcontainer = document.querySelector('.erkekcontainer');
+
+//     fetchProduct.forEach(product => {
+//         if(product.gender === 'Erkek') {
+//             const productCard = document.createElement('div');
+//             productCard.classList.add('card');
+//             productCard.innerHTML += `
+//             <h2>${product.gender}</h2>
+//             `;
+//             erkekcontainer.appendChild(productCard);
+//         }
+//     })
+// }
+
+
+
+
     window.addEventListener('load', () => {
         fetchProducts();
     });
+
 
     // <p>Cinsiyet: ${product.gender}</p>
     // <p>Stok: ${product.stock}</p>
