@@ -19,16 +19,49 @@ function displayProducts(fetchProduct) {
         const productCard = document.createElement('div');
         productCard.classList.add('card');
         productCard.innerHTML += `
-            <img src="${product.image}" alt="${product.name}"/>
-            <h2>${product.name}</h2>
-            <p>Fiyat: ${product.price}</p>
-            <button>Sepete Ekle</button>
-            `;
-            
-            productContainer.appendChild(productCard);
-        });
+        <img src="${product.image}" alt="${product.name}"/>
+        <h2>${product.name}</h2>
+        <p>Fiyat: ${product.price}</p>
+        <button>Sepete Ekle</button>
+        `;
+        
+        productContainer.appendChild(productCard);
+    });
+}
+
+// window.addEventListener('load', () => {
+//     fetchProducts();
+// });
+
+const routes = {
+    '/': {
+        title: 'Anasayfa'
+    },
+    '/erkek': {
+        title:'erkek'
+    },
+    '/kadin': {
+        title: 'kadın'
     }
-    
+};
+
+function handleRoute() {
+    let url = location.hash.substring(1);
+    if(url.length < 1) {
+        url = '/';
+    }
+    console.log(url);
+
+}
+
+handleRoute();
+addEventListener('hashchange', handleRoute);
+
+
+
+
+
+
 
     //  Filtreleme
 // function filteredProducts (fetchProduct) {
@@ -49,9 +82,6 @@ function displayProducts(fetchProduct) {
 
 
 
-    window.addEventListener('load', () => {
-        fetchProducts();
-    });
 
 
     // <p>Cinsiyet: ${product.gender}</p>
