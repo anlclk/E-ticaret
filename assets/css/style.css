@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600&display=swap');
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -7,6 +9,8 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  font-family: 'Roboto Slab', serif;
+  background-color: #ffffff;
 }
 img, picture, video, canvas, svg {
   display: block;
@@ -27,6 +31,21 @@ li {
 a {
   text-decoration: none;
 }
+h1 {
+  color: #000000;
+  font-size: 40px;
+}
+h4 {
+  margin-bottom: 5px;
+  letter-spacing: 0.6px;
+}
+h5 {
+  color: #0000009c;
+  font-size: 11px;
+  margin-bottom: 18px;
+  height: 33px;
+
+}
 .container {
   width: 1280px;
   border: solid;
@@ -44,6 +63,9 @@ a {
   display: flex;
   gap: 50px;
 }
+.headerNav li {
+  color: #000000;
+}
 .wrapper {
   display: flex;
   justify-content: center;
@@ -57,6 +79,8 @@ a {
 .wrapperNav li{
   border: solid;
   padding-inline: 80px;
+  border-radius: 10px;
+  color: #000000;
 }
 .main {
   padding-inline: 40px;
@@ -67,6 +91,30 @@ a {
   gap: 40px;
 }
 .card {
-  border: solid 4px;
+  border: solid 1px #fff;
   padding-inline: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.cardDetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.basketBtn {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: solid 1.7px #8d8d8c2d;
+  border-radius: 7px;
+  padding: 5px;
+  font-size: 13px;
+  background-color: #fff;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.basketBtn:hover {
+  background-color: #000000;
+  border: solid 1.7px #000000;
+  color: #fff;
+  transition: 0.6s;
 }

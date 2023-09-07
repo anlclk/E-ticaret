@@ -92,15 +92,19 @@ function createProductCard(product) {
     productCard.classList.add('card');
     productCard.innerHTML = `
         <img src="${product.image}" alt="${product.name}"/>
-        <h2>${product.name}</h2>
-        <p>Fiyat: ${product.price}</p>
-        <button>Sepete Ekle</button>
+        <h4>${product.name}</h4>
+        <h5>${product.description}</h5>
+        <div class="cardDetails">
+            <p>${product.price} TL</p>
+            <button class="basketBtn">Sepete Ekle</button>
+        </div>
     `;
 
     return productCard;
 }
 
 loadHomePage();
+
 
 
 
