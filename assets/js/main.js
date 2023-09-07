@@ -1,6 +1,6 @@
 const routes = {
     '/': {
-        title: 'Anasayfa',
+        title: 'Tüm Ürünler',
         callback: loadHomePage
     },
     '/erkek': {
@@ -20,16 +20,19 @@ const routes = {
     }
 };
 
+const pageTitlePrefix = 'Moda | ';
+
 async function handleRoute() {
     let url = location.hash.substring(1);
+    document.title = pageTitlePrefix + routes[url].title;
     if (url.length < 1) {
         url = '/';
     }
-
+    
     const route = routes[url];
     if (route && route.callback) {
         clearContent();
-        document.title = route.title;
+        // document.title = route.title;
         route.callback();
     } else {
         'Sayfa bulunamadı'
