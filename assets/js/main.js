@@ -1,117 +1,103 @@
-async function fetchProducts() {
-    const fetchProduct = await fetch ('https://rceavizwdfumfwcligdo.supabase.co/rest/v1/product', {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjZWF2aXp3ZGZ1bWZ3Y2xpZ2RvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5Mzc2NzE4OSwiZXhwIjoyMDA5MzQzMTg5fQ.HKb5hnAuE0GgkjsISYWYmRDpi4XeqV9aPU3T6ihqI_c",
-            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjZWF2aXp3ZGZ1bWZ3Y2xpZ2RvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5Mzc2NzE4OSwiZXhwIjoyMDA5MzQzMTg5fQ.HKb5hnAuE0GgkjsISYWYmRDpi4XeqV9aPU3T6ihqI_c'
-        }
+const routes = {
+    '/': {
+        title: 'Anasayfa',
+        callback: loadHomePage
+    },
+    '/erkek': {
+        title: 'Erkek',
+        callback: loadManProducts
+    },
+    '/kadin': {
+        title: 'Kadın',
+        callback: loadWomanProducts
+    },
+    '/canta': {
+        title: 'Çanta',
+        callback: loadBagProducts
+    },
+    '/404': {
+        title: 'Sayfa bulunamadı'
     }
-    ).then(x => x.json());
-    console.log(fetchProduct);
-    displayProducts(fetchProduct);
-    // filteredProducts(fetchProduct);
+};
+
+async function handleRoute() {
+    let url = location.hash.substring(1);
+    if (url.length < 1) {
+        url = '/';
+    }
+
+    const route = routes[url];
+    if (route && route.callback) {
+        clearContent();
+        document.title = route.title;
+        route.callback();
+    } else {
+        'Sayfa bulunamadı'
+    }
 }
 
-function displayProducts(fetchProduct) {
-    const productContainer = document.querySelector('.productContainer');
+addEventListener('hashchange', handleRoute);
 
-    fetchProduct.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.classList.add('card');
-        productCard.innerHTML += `
-        <img src="${product.image}" alt="${product.name}"/>
-        <h2>${product.name}</h2>
-        <p>Fiyat: ${product.price}</p>
-        <button>Sepete Ekle</button>
-        `;
-        
+function clearContent() {
+    const productContainer = document.querySelector('.productContainer');
+    productContainer.innerHTML = '';
+}
+
+async function loadHomePage() {
+    const allProducts = await fetchData();
+    displayProducts(allProducts);
+}
+
+async function loadManProducts() {
+    const allProducts = await fetchData();
+    const manProducts = allProducts.filter(product => product.gender === 'Erkek');
+    displayProducts(manProducts);
+}
+
+async function loadWomanProducts() {
+    const allProducts = await fetchData();
+    const womanProducts = allProducts.filter(product => product.gender === 'Kadın');
+    displayProducts(womanProducts);
+}
+
+async function loadBagProducts() {
+    const allProducts = await fetchData();
+    const bagProducts = allProducts.filter(product => product.type === 'Çanta');
+    displayProducts(bagProducts)
+}
+
+async function fetchData() {
+    return await fetch('https://rceavizwdfumfwcligdo.supabase.co/rest/v1/product', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjZWF2aXp3ZGZ1bWZ3Y2xpZ2RvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5Mzc2NzE4OSwiZXhwIjoyMDA5MzQzMTg5fQ.HKb5hnAuE0GgkjsISYWYmRDpi4XeqV9aPU3T6ihqI_c',
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjZWF2aXp3ZGZ1bWZ3Y2xpZ2RvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5Mzc2NzE4OSwiZXhwIjoyMDA5MzQzMTg5fQ.HKb5hnAuE0GgkjsISYWYmRDpi4XeqV9aPU3T6ihqI_c'
+        }
+    }).then(x => x.json());
+}
+
+function displayProducts(products) {
+    const productContainer = document.querySelector('.productContainer');
+    products.forEach(product => {
+        const productCard = createProductCard(product);
         productContainer.appendChild(productCard);
     });
 }
 
-// window.addEventListener('load', () => {
-//     fetchProducts();
-// });
+function createProductCard(product) {
+    const productCard = document.createElement('div');
+    productCard.classList.add('card');
+    productCard.innerHTML = `
+        <img src="${product.image}" alt="${product.name}"/>
+        <h2>${product.name}</h2>
+        <p>Fiyat: ${product.price}</p>
+        <button>Sepete Ekle</button>
+    `;
 
-const routes = {
-    '/': {
-        title: 'Anasayfa'
-    },
-    '/erkek': {
-        title:'erkek'
-    },
-    '/kadin': {
-        title: 'kadın'
-    }
-};
-
-function handleRoute() {
-    let url = location.hash.substring(1);
-    if(url.length < 1) {
-        url = '/';
-    }
-    console.log(url);
-
+    return productCard;
 }
 
-handleRoute();
-addEventListener('hashchange', handleRoute);
-
-
-
-
-
-
-
-    //  Filtreleme
-// function filteredProducts (fetchProduct) {
-//     const erkekcontainer = document.querySelector('.erkekcontainer');
-
-//     fetchProduct.forEach(product => {
-//         if(product.gender === 'Erkek') {
-//             const productCard = document.createElement('div');
-//             productCard.classList.add('card');
-//             productCard.innerHTML += `
-//             <h2>${product.gender}</h2>
-//             `;
-//             erkekcontainer.appendChild(productCard);
-//         }
-//     })
-// }
-
-
-
-
-
-
-    // <p>Cinsiyet: ${product.gender}</p>
-    // <p>Stok: ${product.stock}</p>
-    // <p>Tür: ${product.type}</p>
-    // <p>${product.description}</p>
-
-    // supabase' de card'da görünecek kısa detay ekle
-    // descriptionu uzun detay ürüne tıkladığında görünsün
-
-
-
-
-
-
-
-
-
-
-
-    // fetch(
-    //     'https://rceavizwdfumfwcligdo.supabase.co/rest/v1/product'
-    //     , {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjZWF2aXp3ZGZ1bWZ3Y2xpZ2RvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5Mzc2NzE4OSwiZXhwIjoyMDA5MzQzMTg5fQ.HKb5hnAuE0GgkjsISYWYmRDpi4XeqV9aPU3T6ihqI_c",
-    //             'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJjZWF2aXp3ZGZ1bWZ3Y2xpZ2RvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5Mzc2NzE4OSwiZXhwIjoyMDA5MzQzMTg5fQ.HKb5hnAuE0GgkjsISYWYmRDpi4XeqV9aPU3T6ihqI_c'
-    //         }
-    //     }).then(x => x.json())
-    //     .then(data => { let products = data; console.log(products) });
+loadHomePage();
 
 
 
@@ -138,12 +124,14 @@ addEventListener('hashchange', handleRoute);
 
 
 
-// const servicePrefix = 'https://rceavizwdfumfwcligdo.supabase.co/rest/v1/product';
-// const apikey = 
 
 
 
-    
+
+
+
+
+
 
 
 
