@@ -66,6 +66,15 @@ h5 {
 .headerNav li {
   color: #000000;
 }
+.headerNav img {
+  width: 20px;
+  height: 20px;
+}
+.headerNav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .wrapper {
   display: flex;
   justify-content: center;
@@ -75,12 +84,14 @@ h5 {
   display: flex;
   justify-content: center;
   gap: 30px;
+  
 }
 .wrapperNav li{
-  border: solid;
+  
   padding-inline: 80px;
   border-radius: 10px;
   color: #000000;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .main {
   padding-inline: 40px;
