@@ -44,11 +44,9 @@ h5 {
   font-size: 11px;
   margin-bottom: 18px;
   height: 33px;
-
 }
 .container {
   width: 1280px;
-  border: solid;
   margin-inline: auto;
 }
 .header {
@@ -58,6 +56,7 @@ h5 {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  border-bottom: solid 1.7px #8d8d8c2d;
 }
 .headerNav {
   display: flex;
@@ -84,7 +83,6 @@ h5 {
   display: flex;
   justify-content: center;
   gap: 30px;
-  
 }
 .wrapperNav li{
   
@@ -95,6 +93,7 @@ h5 {
 }
 .main {
   padding-inline: 40px;
+  padding-bottom: 100px;
 }
 .productContainer {
   display: grid;
