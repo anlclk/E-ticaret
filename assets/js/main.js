@@ -39,7 +39,6 @@ async function handleRoute() {
     }
 }
 
-addEventListener('hashchange', handleRoute);
 
 function clearContent() {
     const productContainer = document.querySelector('.productContainer'); //sayfa değiştiğinde sayfa içeriği temizledim
@@ -91,20 +90,21 @@ function createProductCard(product) {
     const productCard = document.createElement('div');
     productCard.classList.add('card');
     productCard.innerHTML = `
-        <img src="${product.image}" alt="${product.name}"/>
-        <h4>${product.name}</h4>
-        <h5>${product.description}</h5>
-        <div class="cardDetails">
-            <p>${product.price} TL</p>
-            <button class="basketBtn">Sepete Ekle</button>
-        </div>
+    <img src="${product.image}" alt="${product.name}"/>
+    <h4>${product.name}</h4>
+    <h5>${product.description}</h5>
+    <div class="cardDetails">
+    <p>${product.price} TL</p>
+    <button class="basketBtn">Sepete Ekle</button>
+    </div>
     `;
-
+    
     return productCard;
 }
 
+addEventListener('hashchange', handleRoute);
 //sayfa açıldığında anasayfayı yüklemesini, çalıştırmasını istedim
-loadHomePage();
+// loadHomePage();
 
 
 
