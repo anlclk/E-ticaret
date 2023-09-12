@@ -30,6 +30,7 @@ li {
 }
 a {
   text-decoration: none;
+  color: inherit;
 }
 h1 {
   color: #000000;
@@ -85,11 +86,15 @@ h5 {
   gap: 30px;
 }
 .wrapperNav li{
-  
-  padding-inline: 80px;
+  text-align: center;
+  width: 200px;
   border-radius: 10px;
   color: #000000;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+/* Tıklanabilir alanı büyültmek için */
+.wrapperNav li>a{
+  display: block;
 }
 .main {
   padding-inline: 40px;
